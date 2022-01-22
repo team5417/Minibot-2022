@@ -25,12 +25,13 @@ public class Drive extends SubsystemBase {
   }
 
   public void rawMotorPower(double leftPower, double rightPower) {
-    
     driveMasterL.set(ControlMode.PercentOutput, leftPower);
     driveMasterR.set(ControlMode.PercentOutput, rightPower);
+    System.out.println("left power" + leftPower);
+    System.out.println("right power" + rightPower);
   }
 
   public void setPower(double leftPower, double rightPower){
-    rawMotorPower(-Math.pow(leftPower, 1), Math.pow(rightPower, 1));
+    rawMotorPower(-0.5*Math.pow(leftPower, 3), 0.5*Math.pow(rightPower, 3));
   }
 }
