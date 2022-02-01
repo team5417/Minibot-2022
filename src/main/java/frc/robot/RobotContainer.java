@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -26,6 +27,7 @@ public class RobotContainer {
   
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final TankDrive tankDrive;
+  private final Limelight limelight;
 
   public Joystick pad;
 
@@ -34,6 +36,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     driveSubsystem = new Drive();
+    limelight = new Limelight();
     tankDrive = new TankDrive(this, driveSubsystem);
   }
 
