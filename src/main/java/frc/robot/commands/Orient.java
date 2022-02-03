@@ -5,10 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Limelight;
 
 public class Orient extends CommandBase {
   /** Creates a new Orient. */
-  public Orient() {
+
+  private final Limelight limelight;
+  private final Drive drive;
+
+  public Orient(Limelight limelight, Drive drive) {
+    this.limelight = limelight;
+    this.drive = drive;
+    addRequirements(limelight, drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

@@ -33,9 +33,9 @@ public class Limelight extends SubsystemBase {
 
   @Override
   public void periodic() {
-    tx = limelight.getEntry("tx").getDouble(-1.0);
-    ty = limelight.getEntry("ty").getDouble(-1.0);
+    tx = limelight.getEntry("tx").getDouble(0.0);
+    ty = limelight.getEntry("ty").getDouble(0.0);
     tv = (limelight.getEntry("tv").getDouble(0.0) != 0);
-    System.out.println("tx: " + tx + ", ty: " + ty + ", tv: " + tv);
+    //System.out.println("tx: " + tx + ", ty: " + ty + ", tv: " + tv);
   }
 }

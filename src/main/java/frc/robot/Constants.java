@@ -17,4 +17,5 @@ public final class Constants {
     public static final int slaveRightMotor = 1; 
     public static final int masterLeftMotor = 5;
     public static final int slaveLeftMotor = 9; 
+    public static final double kPturn = 0.05; 
 }

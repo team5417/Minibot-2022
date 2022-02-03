@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Orient;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Limelight;
@@ -23,11 +24,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final Drive driveSubsystem;
+  private final Drive drive;
+  private final Limelight limelight;
   
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final TankDrive tankDrive;
-  private final Limelight limelight;
+  private final Orient orient;
 
   public Joystick pad;
 
@@ -35,9 +37,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    driveSubsystem = new Drive();
+    drive = new Drive();
     limelight = new Limelight();
-    tankDrive = new TankDrive(this, driveSubsystem);
+    tankDrive = new TankDrive(this, drive);
+    orient = new Orient(limelight, drive);
   }
 
   /**
@@ -59,10 +62,28 @@ public class RobotContainer {
     return pad.getRawAxis(5);
   }
 
-  public Drive getDriveSubsystem() {
-    //this returns the drive subsystem in the robot container
-    return driveSubsystem;
+  public boolean getAPressed(){
+    System.out.println(pad.getRawButtonPressed(1));
+    return pad.getRawButtonPressed(1);
   }
+
+  public Drive getDrive() {
+    //this returns the drive subsystem in the robot container
+    return drive;
+  }
+
+  public Limelight getLimelight(){
+    return limelight;
+  }
+
+  public TankDrive getTankDrive(){
+    return tankDrive;
+  }
+
+  public Orient getOrient(){
+    return orient;
+  }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
