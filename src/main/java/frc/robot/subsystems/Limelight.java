@@ -12,7 +12,7 @@ public class Limelight extends SubsystemBase {
   /** Creates a new Limelight. */
 
   private NetworkTable limelight;
-  private double tx, ty;
+  private double tx, ty, ta;
   private boolean tv;
 
   public Limelight() {
@@ -31,11 +31,16 @@ public class Limelight extends SubsystemBase {
     return ty;
   }
 
+  public double getA(){
+    return ta;
+  }
+
   @Override
   public void periodic() {
     tx = limelight.getEntry("tx").getDouble(0.0);
     ty = limelight.getEntry("ty").getDouble(0.0);
     tv = (limelight.getEntry("tv").getDouble(0.0) != 0);
+    ta = limelight.getEntry("ta").getDouble(0.0);
     //System.out.println("tx: " + tx + ", ty: " + ty + ", tv: " + tv);
   }
 }
