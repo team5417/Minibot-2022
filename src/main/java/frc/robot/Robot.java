@@ -82,13 +82,8 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    //robotContainer.getTankDrive().schedule();
-    //robotContainer.getDrive().setDefaultCommand(robotContainer.getTankDrive());
-    robotContainer.getDrive().turnLimelight(
-      robotContainer.getLimelight().getX(),
-      robotContainer.getLimelight().getV(),
-      robotContainer.getAPressed()
-    );
+    robotContainer.getTankDrive().schedule();
+    robotContainer.getDrive().setDefaultCommand(robotContainer.getTankDrive());
     CommandScheduler.getInstance().run();
   }
 

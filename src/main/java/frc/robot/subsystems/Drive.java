@@ -41,8 +41,8 @@ public class Drive extends SubsystemBase {
     rawMotorPower(-0.5*Math.pow(leftPower, 3), 0.5*Math.pow(rightPower, 3));
   }
 
-  public void turnLimelight(double tx, boolean tv, boolean pressed){
-    if(pressed && tv && Math.abs(tx) > 2){
+  public void turnLimelight(double tx, boolean tv){
+    if(tv && Math.abs(tx) > 2){
       double power = tx * Constants.kPturn;
       rawMotorPower(power, 2 * power);
     }else{

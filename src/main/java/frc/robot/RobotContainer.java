@@ -12,6 +12,8 @@ import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,7 +29,8 @@ public class RobotContainer {
   private final TankDrive tankDrive;
   private final Orient orient;
 
-  public Joystick pad;
+  public Joystick pad = new Joystick(0);
+  public JoystickButton buttonA = new JoystickButton(pad, 1);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -46,8 +49,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //this initalizes the joystick
-    pad = new Joystick(0);
+    buttonA.whenHeld(new Orient(limelight, drive)).whenReleased(new InstantCommand(() -> {
+      limelight.ledOff();
+      drive.rawMotorPower(0, 0);
+    }));
   }
   public double leftSpeed() {
     //this gets the speed for the left motors by returning the value of the joystick's axis, specifically axis 1 on the Xbox controller

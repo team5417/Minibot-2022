@@ -35,6 +35,14 @@ public class Limelight extends SubsystemBase {
     return ta;
   }
 
+  public void ledOn(){
+    limelight.getEntry("ledMode").setDouble(3.0);
+  }
+
+  public void ledOff(){
+    limelight.getEntry("ledMode").setDouble(1.0);
+  }
+
   @Override
   public void periodic() {
     tx = limelight.getEntry("tx").getDouble(0.0);
