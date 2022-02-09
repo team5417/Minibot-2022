@@ -63,8 +63,9 @@ public class RobotContainer {
   }
 
   public boolean getAPressed(){
-    System.out.println(pad.getRawButtonPressed(1));
-    return pad.getRawButtonPressed(1);
+    //System.out.println(pad.getRawButtonPressed(1));
+    return true;
+    //return pad.getRawButtonPressed(1);
   }
 
   public Drive getDrive() {

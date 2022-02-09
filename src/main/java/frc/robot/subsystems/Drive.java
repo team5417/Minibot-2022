@@ -20,13 +20,17 @@ public class Drive extends SubsystemBase {
   private TalonSRX driveMasterR = new TalonSRX(Constants.masterRightMotor);
 
   public Drive() {
+    wowow();
+  }
+
+  public void wowow(){
+    driveSlaveL.setInverted(true);
     driveSlaveL.follow(driveMasterL);
     driveSlaveR.follow(driveMasterR);
   }
 
   public void rawMotorPower(double leftPower, double rightPower) {
-    driveSlaveL.follow(driveMasterL);
-    driveSlaveR.follow(driveMasterR);
+    wowow();
     driveMasterL.set(ControlMode.PercentOutput, leftPower);
     driveMasterR.set(ControlMode.PercentOutput, rightPower);
     //System.out.println("left power" + leftPower);
@@ -38,9 +42,11 @@ public class Drive extends SubsystemBase {
   }
 
   public void turnLimelight(double tx, boolean tv, boolean pressed){
-    if(pressed && tv && Math.abs(tx) > 5){
+    if(pressed && tv && Math.abs(tx) > 2){
       double power = tx * Constants.kPturn;
-      rawMotorPower(-power, -power);
+      rawMotorPower(power, 2 * power);
+    }else{
+      rawMotorPower(0, 0);
     }
   }
 }
