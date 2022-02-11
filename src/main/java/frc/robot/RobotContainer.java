@@ -12,7 +12,6 @@ import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -27,19 +26,21 @@ public class RobotContainer {
   private final Limelight limelight;
   
   private final TankDrive tankDrive;
-  private final Orient orient;
+  //private final Orient orient;
 
-  public Joystick pad = new Joystick(0);
-  public JoystickButton buttonA = new JoystickButton(pad, 1);
+  public Joystick pad;
+  public JoystickButton buttonA;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
+    pad = new Joystick(0);
+    buttonA = new JoystickButton(pad, 1);
     drive = new Drive();
     limelight = new Limelight();
     tankDrive = new TankDrive(this, drive);
-    orient = new Orient(limelight, drive);
+    //orient = new Orient(limelight, drive);
+    // Configure the button bindings
+    configureButtonBindings();
   }
 
   /**
@@ -49,10 +50,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonA.whenHeld(new Orient(limelight, drive)).whenReleased(new InstantCommand(() -> {
-      limelight.ledOff();
-      drive.rawMotorPower(0, 0);
-    }));
+    buttonA.whileHeld(new Orient(limelight, drive));
   }
   public double leftSpeed() {
     //this gets the speed for the left motors by returning the value of the joystick's axis, specifically axis 1 on the Xbox controller
@@ -82,9 +80,9 @@ public class RobotContainer {
     return tankDrive;
   }
 
-  public Orient getOrient(){
+  /*public Orient getOrient(){
     return orient;
-  }
+  }*/
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
